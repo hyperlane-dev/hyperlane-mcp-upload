@@ -1,0 +1,41 @@
+[package]
+name = "hyperlane-mcp-upload"
+version = "0.1.0"
+edition = "2024"
+exclude = ["target", "sh", ".github", "Cargo.lock"]
+license = "MIT"
+description = "MCP server that uploads local files to ltpp.vip via hyperlane"
+repository = "https://github.com/eastspire/hyperlane-mcp-upload"
+
+[lib]
+name = "hyperlane_mcp_upload"
+path = "src/lib.rs"
+
+[[bin]]
+name = "hyperlane-mcp-upload"
+path = "src/main.rs"
+
+[dependencies]
+hyperlane = "21.3.6"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+
+[profile.dev]
+incremental = false
+opt-level = 3
+lto = true
+panic = "unwind"
+debug = false
+codegen-units = 1
+strip = "debuginfo"
+
+[profile.release]
+incremental = false
+opt-level = 3
+lto = true
+panic = "unwind"
+debug = false
+codegen-units = 1
+strip = "debuginfo"
